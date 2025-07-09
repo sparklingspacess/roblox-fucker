@@ -1092,7 +1092,10 @@ local PropertyData = {
 		"MeshId",
 		"MeshSize",
 		"RenderFidelity",
-		"TextureID"
+		"TextureID",
+		"Size",
+		"CFrame",
+		"Position"
 	},
 	Message = {
 		"Text"
@@ -1113,7 +1116,9 @@ local PropertyData = {
 	},
 	Motor6D = {
 		"ChildName",
-		"ParentName"
+		"ParentName",
+		"C0",
+		"C1"
 	},
 	Mouse = {
 		"Hit",
@@ -1176,7 +1181,44 @@ local PropertyData = {
 		"PantsTemplate"
 	},
 	Part = {
-		"Shape"
+		"Anchored",
+		"AssemblyAngularVelocity",
+		"AssemblyCenterOfMass",
+		"AssemblyLinearVelocity",
+		"AssemblyMass",
+		"AssemblyRootPart",
+		"Shape",
+		"BackSurface",
+		"BottomSurface",
+		"BrickColor",
+		"CFrame",
+		"CanCollide",
+		"CanQuery",
+		"CanTouch",
+		"CastShadow",
+		"CenterOfMass",
+		"CollisionGroupId",
+		"Color",
+		"CustomPhysicalProperties",
+		"FrontSurface",
+		"LeftSurface",
+		"Locked",
+		"Mass",
+		"Massless",
+		"Material",
+		"MaterialVariant",
+		"Orientation",
+		"PivotOffset",
+		"Position",
+		"Reflectance",
+		"ResizeIncrement",
+		"ResizeableFaces",
+		"RightSurface",
+		"RootPriority",
+		"Rotation",
+		"Size",
+		"TopSurface",
+		"Transparency"
 	},
 	PartAdornment = {
 		"Adornee"
@@ -2243,13 +2285,33 @@ for datamodel, instance in pairs(game:GetDescendants()) do
 		if tostring(property) == class then
 			for _, prop in pairs(proptable) do
 				local has = hasprop(instance, prop)
-				if has == true and prop ~= "Brightness" then
+				if has == true and prop ~= "Brightness" and prop ~= "CameraMaxZoomDistance" and prop ~= "TimeOfDay" and prop ~= "FogEnd" and prop ~= "FogStart" and prop ~= "ExposureCompensation" and prop ~= "ClockTime" and prop ~= "Anchored" then
 					local val = instance[prop]
+					local random = Random.new():NextNumber(-fucker.config.fuckamount, fucker.config.fuckamount)
 					pcall(function()
-						instance[prop] = Random.new():NextNumber(0, fucker.config.fuckamount)
+						instance[prop] = Random.new():NextNumber(0, random)
 					end)
 					pcall(function()
-						instance[prop] = CFrame.new(Random.new():NextNumber(0, fucker.config.fuckamount), Random.new():NextNumber(0, fucker.config.fuckamount), Random.new():NextNumber(0, fucker.config.fuckamount))
+						if prop == "C0" or prop == "C1" or prop == "CFrame" then
+							instance[prop] = instance[prop] * CFrame.new(Random.new():NextNumber(0, random), Random.new():NextNumber(0, random), Random.new():NextNumber(0, random))
+						end
+					end)
+					pcall(function()
+						if prop == "Position" and prop == "Rotation" then
+							instance[prop] = instance[prop] + Vector3.new(Random.new():NextNumber(0, random), Random.new():NextNumber(0, random), Random.new():NextNumber(0, random))
+						end
+					end)
+					pcall(function()
+						if prop == "Color3" or prop == "Color" or prop == "Ambient" then
+							instance[prop] = Color3.fromRGB(Random.new():NextNumber(0, random * 100), Random.new():NextNumber(0, random * 100), Random.new():NextNumber(0, random * 100))
+						end
+					end)
+					pcall(function()
+						if prop == "Texture" or prop == "Decal" or prop == "Image" or prop == "SoundId" then
+							local ye = string.split(random, ".")
+							local a = ye[2]
+							instance[prop] = "rbxassetid://"..a
+						end
 					end)
 				end
 			end
