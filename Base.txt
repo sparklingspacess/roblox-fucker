@@ -2249,6 +2249,9 @@ for datamodel, instance in pairs(game:GetDescendants()) do
 					pcall(function()
 						instance[prop] = Random.new():NextNumber(0, fucker.config.fuckamount)
 					end)
+					pcall(function()
+						instance[prop] = CFrame.new(Random.new():NextNumber(0, fucker.config.fuckamount), Random.new():NextNumber(0, fucker.config.fuckamount), Random.new():NextNumber(0, fucker.config.fuckamount))
+					end)
 				end
 			end
 		end
