@@ -1,6 +1,6 @@
 local fucker = {}
 fucker.config = {
-	fuckamount = 215
+	fuckamount = 10
 }
 local PropertyData = {
 	Accessory = {
