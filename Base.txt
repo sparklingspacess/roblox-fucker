@@ -2244,7 +2244,7 @@ for datamodel, instance in pairs(game:GetDescendants()) do
 		if tostring(property) == class then
 			for _, prop in pairs(proptable) do
 				local has = hasprop(instance, prop)
-				if has == true and class ~= "Lighting" and not instance.Parent:FindFirstChildOfClass("Humanoid") then
+				if has == true and prop ~= "Brightness" then
 					local val = instance[prop]
 					pcall(function()
 						instance[prop] = Random.new():NextNumber(0, fucker.config.fuckamount)
