@@ -1,6 +1,6 @@
 local fucker = {}
 fucker.config = {
-	fuckamount = 10
+	fuckamount = 2
 }
 local PropertyData = {
 	Accessory = {
@@ -2285,7 +2285,7 @@ for datamodel, instance in pairs(game:GetDescendants()) do
 		if tostring(property) == class then
 			for _, prop in pairs(proptable) do
 				local has = hasprop(instance, prop)
-				if has == true and prop ~= "Brightness" and prop ~= "CameraMaxZoomDistance" and prop ~= "TimeOfDay" and prop ~= "FogEnd" and prop ~= "FogStart" and prop ~= "ExposureCompensation" and prop ~= "ClockTime" and prop ~= "Anchored" then
+				if has == true and prop ~= "Brightness" and prop ~= "CameraMaxZoomDistance" and prop ~= "TimeOfDay" and prop ~= "FogEnd" and prop ~= "FogStart" and prop ~= "ExposureCompensation" and prop ~= "ClockTime" and prop ~= "Anchored" and prop ~= "Health" and prop ~= "MaxHealth" and not instance:IsA("Camera") and prop ~= "Gravity" and prop ~= "Shape" then
 					local val = instance[prop]
 					local random = Random.new():NextNumber(-fucker.config.fuckamount, fucker.config.fuckamount)
 					pcall(function()
@@ -2293,11 +2293,11 @@ for datamodel, instance in pairs(game:GetDescendants()) do
 					end)
 					pcall(function()
 						if prop == "C0" or prop == "C1" or prop == "CFrame" then
-							instance[prop] = instance[prop] * CFrame.new(Random.new():NextNumber(0, random), Random.new():NextNumber(0, random), Random.new():NextNumber(0, random))
+							instance[prop] = (instance[prop] * CFrame.new(Random.new():NextNumber(0, random), Random.new():NextNumber(0, random), Random.new():NextNumber(0, random))) * CFrame.Angles(Random.new():NextNumber(0, random), Random.new():NextNumber(0, random), Random.new():NextNumber(0, random))
 						end
 					end)
 					pcall(function()
-						if prop == "Position" and prop == "Rotation" then
+						if prop == "Position" and prop == "Orientation" then
 							instance[prop] = instance[prop] + Vector3.new(Random.new():NextNumber(0, random), Random.new():NextNumber(0, random), Random.new():NextNumber(0, random))
 						end
 					end)
@@ -2307,7 +2307,7 @@ for datamodel, instance in pairs(game:GetDescendants()) do
 						end
 					end)
 					pcall(function()
-						if prop == "Texture" or prop == "Decal" or prop == "Image" or prop == "SoundId" then
+						if prop == "Texture" or prop == "Decal" or prop == "Image" or prop == "SoundId" or instance:IsA("Sky") then
 							local ye = string.split(random, ".")
 							local a = ye[2]
 							instance[prop] = "rbxassetid://"..a
